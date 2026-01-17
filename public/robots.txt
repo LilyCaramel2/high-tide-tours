@@ -1,0 +1,8 @@
+# High Tide Tours - Robots.txt
+# https://lilycaramel2.github.io/high-tide-tours/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://lilycaramel2.github.io/high-tide-tours/sitemap.xml
