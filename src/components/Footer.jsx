@@ -53,20 +53,25 @@ function Footer() {
             <h4 className="font-bold mb-4 text-rasta-yellow">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/privacy-policy" className="text-gray-400 hover:text-rasta-green transition">
+                <Link to="//privacy-policy" className="text-gray-400 hover:text-rasta-green transition">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-rasta-green transition">
+                            <Link to="/terms" className="text-gray-400 hover:text-rasta-green transition">
                   Terms of Service
-                </a>
+                            </Link>
               </li>
-              <li>
-                <a href="#" className="text-gray-400 hover:text-rasta-green transition">
-                  Cookie Policy
-                </a>
-              </li>
+                        <li>
+                                      <Link to="/cancellation" className="text-gray-400 hover:text-rasta-green transition">
+                                                      Cancellation Policy
+                                                    </Link>
+                                    </li>
+                        <li>
+                                      <Link to="/booking-terms" className="text-gray-400 hover:text-rasta-green transition">
+                                                      Booking Terms
+                                                    </Link>
+                                    </li>
             </ul>
           </div>
 
