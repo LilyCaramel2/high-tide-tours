@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  .rasta-gradient {
+    @apply bg-gradient-to-r from-rasta-red via-rasta-yellow to-rasta-green;
+  }
+  
+  .rasta-gradient-vertical {
+    @apply bg-gradient-to-b from-rasta-red via-rasta-yellow to-rasta-green;
+  }
+  
+  .btn-primary {
+    @apply bg-gradient-to-r from-rasta-red to-rasta-yellow hover:from-rasta-red-light hover:to-rasta-yellow-light text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+  
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
+  }
+}
