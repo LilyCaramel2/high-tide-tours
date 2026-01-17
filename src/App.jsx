@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CookiePopup from './components/CookiePopup';
+import WhatsAppButton from './components/WhatsAppButton';
+import SocialMediaBanner from './components/SocialMediaBanner';
 import Home from './pages/Home';
 import About from './pages/About';
 import Tours from './pages/Tours';
@@ -29,8 +31,10 @@ function App() {
                         <Route path="/cancellation" element={<CancellationPolicy />}/>
                         <Route path="/booking-terms" element={<BookingTerms />}/>
           </Routes>
+                    <SocialMediaBanner />
         </main>
         <Footer />
+                <WhatsAppButton />
         <CookiePopup />
       </div>
     </Router>
