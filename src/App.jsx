@@ -8,6 +8,9 @@ import Tours from './pages/Tours';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import CancellationPolicy from './pages/CancellationPolicy';
+import BookingTerms from './pages/BookingTerms';
 
 function App() {
   return (
@@ -22,6 +25,9 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+                        <Route path="/terms" element={<TermsOfService />}/>
+                        <Route path="/cancellation" element={<CancellationPolicy />}/>
+                        <Route path="/booking-terms" element={<BookingTerms />}/>
           </Routes>
         </main>
         <Footer />
