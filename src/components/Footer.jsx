@@ -53,25 +53,25 @@ function Footer() {
             <h4 className="font-bold mb-4 text-rasta-yellow">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="//privacy-policy" className="text-gray-400 hover:text-rasta-green transition">
+                <Link to="/privacy-policy" className="text-gray-400 hover:text-rasta-green transition">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                            <Link to="/terms" className="text-gray-400 hover:text-rasta-green transition">
+                <Link to="/terms" className="text-gray-400 hover:text-rasta-green transition">
                   Terms of Service
-                            </Link>
+                </Link>
               </li>
-                        <li>
-                                      <Link to="/cancellation" className="text-gray-400 hover:text-rasta-green transition">
-                                                      Cancellation Policy
-                                                    </Link>
-                                    </li>
-                        <li>
-                                      <Link to="/booking-terms" className="text-gray-400 hover:text-rasta-green transition">
-                                                      Booking Terms
-                                                    </Link>
-                                    </li>
+              <li>
+                <Link to="/cancellation" className="text-gray-400 hover:text-rasta-green transition">
+                  Cancellation Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/booking-terms" className="text-gray-400 hover:text-rasta-green transition">
+                  Booking Terms
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -80,8 +80,8 @@ function Footer() {
             <h4 className="font-bold mb-4 text-rasta-yellow">Contact</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="mailto:info@hightidetours.co.za" className="hover:text-rasta-green transition">
-                  info@hightidetours.co.za
+                <a href="mailto:digitalnomadcapetown@gmail.com" className="hover:text-rasta-green transition">
+                  digitalnomadcapetown@gmail.com
                 </a>
               </li>
               <li>
@@ -91,12 +91,16 @@ function Footer() {
               </li>
               <li>
                 <a href="https://wa.me/27642205618" className="hover:text-rasta-green transition" target="_blank" rel="noopener noreferrer">
-                  WhatsApp Us
+                  💬 WhatsApp Us
                 </a>
+              </li>
+              <li className="text-gray-400">
+                📍 Be Easy, 17 Sixth Ave<br />
+                Fish Hoek, 7975
               </li>
               <li>
                 <a href="https://instagram.com/hightidetours" className="hover:text-rasta-green transition" target="_blank" rel="noopener noreferrer">
-                  @hightidetours
+                  📸 @hightidetours
                 </a>
               </li>
             </ul>
@@ -106,7 +110,7 @@ function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-500">
           <p>&copy; {new Date().getFullYear()} High Tide Tours. All rights reserved.</p>
-          <p className="mt-2">Cannabis Tourism + Water Sports | Cape Town, South Africa</p>
+          <p className="mt-2">Cannabis Tourism + Water Sports | Cape Town, South Africa 🌿🌊</p>
         </div>
       </div>
     </footer>
