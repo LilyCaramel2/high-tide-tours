@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createBooking } from '../utils/notionApi';
 
 function BookingForm({ packageName, packagePrice, onClose }) {
   const [formData, setFormData] = useState({
@@ -12,10 +13,32 @@ function BookingForm({ packageName, packagePrice, onClose }) {
   });
   const [showPayment, setShowPayment] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState('ZAR');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowPayment(true);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      // Create booking in Notion database
+      await createBooking({
+        ...formData,
+        price: packagePrice ? parseFloat(packagePrice.replace(/[^0-9.]/g, '')) : 0,
+        giftTier: null // Will be auto-calculated in notionApi.js
+      });
+
+      console.log('✅ Booking created in Notion database');
+      setShowPayment(true);
+    } catch (error) {
+      console.error('Failed to create booking:', error);
+      setSubmitError('Failed to submit booking. Please try WhatsApp instead or contact us directly.');
+      // Still show payment screen even if Notion fails (fallback to WhatsApp)
+      setShowPayment(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -74,6 +97,14 @@ function BookingForm({ packageName, packagePrice, onClose }) {
             <h2 className="text-3xl font-bold text-rasta-green">💰 Secure Your Booking</h2>
             <button onClick={onClose} className="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
           </div>
+
+          {submitError && (
+            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+              <p className="text-yellow-700">
+                ⚠️ {submitError}
+              </p>
+            </div>
+          )}
 
           <div className="bg-rasta-yellow/10 p-6 rounded-lg mb-6 border-l-4 border-rasta-yellow">
             <p className="text-lg font-bold text-gray-800 mb-2">📋 Booking Confirmed for Review!</p>
@@ -327,9 +358,10 @@ function BookingForm({ packageName, packagePrice, onClose }) {
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-rasta-red via-rasta-yellow to-rasta-green text-white font-bold py-4 px-6 rounded-lg hover:scale-105 transition-all"
+            disabled={isSubmitting}
+            className="w-full bg-gradient-to-r from-rasta-red via-rasta-yellow to-rasta-green text-white font-bold py-4 px-6 rounded-lg hover:scale-105 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Continue to Payment Details →
+            {isSubmitting ? 'Processing...' : 'Continue to Payment Details →'}
           </button>
         </form>
       </div>
