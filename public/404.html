@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA redirect hack
+    // When GitHub Pages serves a 404, this script redirects to index.html
+    // and passes the path as a query parameter that the app can handle
+    sessionStorage.setItem('redirectPath', location.pathname);
+    location.replace(
+      location.origin + '/high-tide-tours/?path=' + 
+      encodeURIComponent(location.pathname + location.search + location.hash)
+    );
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>
