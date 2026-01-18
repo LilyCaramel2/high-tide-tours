@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CookiePopup from './components/CookiePopup';
@@ -14,9 +15,26 @@ import TermsOfService from './pages/TermsOfService';
 import CancellationPolicy from './pages/CancellationPolicy';
 import BookingTerms from './pages/BookingTerms';
 
+// Component to handle redirects from 404.html
+function RedirectHandler() {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    // Check if we were redirected from 404.html
+    const redirectPath = sessionStorage.getItem('redirectPath');
+    if (redirectPath) {
+      sessionStorage.removeItem('redirectPath');
+      navigate(redirectPath, { replace: true });
+    }
+  }, [navigate]);
+  
+  return null;
+}
+
 function App() {
   return (
     <Router basename="/high-tide-tours">
+      <RedirectHandler />
       <div className="min-h-screen bg-gray-50">
         <Header />
         <main>
@@ -27,14 +45,14 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
-                        <Route path="/terms" element={<TermsOfService />}/>
-                        <Route path="/cancellation" element={<CancellationPolicy />}/>
-                        <Route path="/booking-terms" element={<BookingTerms />}/>
+            <Route path="/terms" element={<TermsOfService />}/>
+            <Route path="/cancellation" element={<CancellationPolicy />}/>
+            <Route path="/booking-terms" element={<BookingTerms />}/>
           </Routes>
-                    <SocialMediaBanner />
+          <SocialMediaBanner />
         </main>
         <Footer />
-                <WhatsAppButton />
+        <WhatsAppButton />
         <CookiePopup />
       </div>
     </Router>
