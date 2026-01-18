@@ -1,9 +1,17 @@
 import Hero from '../components/Hero';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import BookingForm from '../components/BookingForm';
 
 function Tours() {
   const [activePackage, setActivePackage] = useState(0);
+  const [showBooking, setShowBooking] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState(null);
+
+  const handleBooking = (packageName, packagePrice) => {
+    setSelectedPackage({ name: packageName, price: packagePrice });
+    setShowBooking(true);
+  };
 
   // Multi-Day Packages
   const multiDayPackages = [
@@ -351,7 +359,7 @@ function Tours() {
           </div>
         </div>
 
-        {/* GROUP DISCOUNTS - Moved Higher */}
+        {/* GROUP DISCOUNTS */}
         <div className="bg-rasta-green/5 p-8 rounded-lg mb-20 border-l-4 border-rasta-green">
           <h2 className="text-3xl font-bold mb-6 text-rasta-green text-center">👥 Group Discounts - Bring Your Crew!</h2>
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -386,7 +394,6 @@ function Tours() {
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {multiDayPackages.map((pkg, index) => (
               <div key={index} className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition border-t-4 border-rasta-green">
-                {/* All-Inclusive Badge */}
                 <div className="bg-gradient-to-r from-rasta-red via-rasta-yellow to-rasta-green p-3 text-center">
                   <p className="text-white font-bold text-sm">💎 ALL-INCLUSIVE - NO HIDDEN COSTS 💎</p>
                 </div>
@@ -395,7 +402,6 @@ function Tours() {
                   <h3 className="text-3xl font-bold mb-4 text-rasta-green">{pkg.title}</h3>
                   <p className="text-gray-700 mb-6 leading-relaxed">{pkg.description}</p>
                   
-                  {/* Package Duration Options */}
                   <div className="mb-6 bg-gradient-to-r from-rasta-red/10 via-rasta-yellow/10 to-rasta-green/10 p-4 rounded-lg">
                     <p className="text-sm font-semibold text-rasta-green mb-3">CHOOSE YOUR DURATION:</p>
                     {pkg.days.map((days) => (
@@ -406,7 +412,6 @@ function Tours() {
                     ))}
                   </div>
                   
-                  {/* Highlights */}
                   <div className="mb-6">
                     <p className="text-sm font-semibold text-rasta-green mb-3">PACKAGE INCLUDES:</p>
                     <div className="space-y-2">
@@ -419,7 +424,6 @@ function Tours() {
                     </div>
                   </div>
                   
-                  {/* Typical Day Preview */}
                   <div className="mb-6 bg-gray-50 p-4 rounded-lg">
                     <p className="text-sm font-semibold text-rasta-green mb-3">📅 TYPICAL DAY:</p>
                     <div className="space-y-2">
@@ -429,7 +433,6 @@ function Tours() {
                     </div>
                   </div>
 
-                  {/* Value Breakdown */}
                   <div className="mb-6 bg-rasta-yellow/10 p-4 rounded-lg border border-rasta-yellow">
                     <p className="text-sm font-semibold text-rasta-green mb-3">🧮 VALUE BREAKDOWN (3-Day):</p>
                     <div className="space-y-1 text-xs text-gray-700">
@@ -444,13 +447,17 @@ function Tours() {
                     </div>
                   </div>
                   
-                  <button className="btn-primary w-full mt-4">Book This Package</button>
+                  <button 
+                    onClick={() => handleBooking(pkg.title, pkg.prices[3])}
+                    className="btn-primary w-full mt-4"
+                  >
+                    Book This Package
+                  </button>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Multi-Day Package Benefits */}
           <div className="bg-rasta-green/5 p-8 rounded-lg border-l-4 border-rasta-green">
             <h3 className="text-2xl font-bold mb-4 text-rasta-green">✨ Multi-Day Package Perks</h3>
             <div className="grid md:grid-cols-3 gap-6">
@@ -479,7 +486,6 @@ function Tours() {
             Real experiences from travelers who've journeyed with us.
           </p>
 
-          {/* Trust Badges */}
           <div className="flex justify-center gap-6 mb-12 flex-wrap">
             <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-3">
               <div className="text-3xl">⭐</div>
@@ -504,28 +510,20 @@ function Tours() {
             </div>
           </div>
 
-          {/* Reviews Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {reviews.map((review, index) => (
               <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
-                {/* Stars */}
                 <div className="flex mb-3">
                   {[...Array(review.rating)].map((_, i) => (
                     <span key={i} className="text-rasta-yellow text-xl">⭐</span>
                   ))}
                 </div>
-                
-                {/* Review Text */}
                 <p className="text-gray-700 mb-4 leading-relaxed text-sm italic">"{review.text}"</p>
-                
-                {/* Package Badge */}
                 <div className="mb-3">
                   <span className="bg-rasta-green/10 text-rasta-green text-xs px-3 py-1 rounded-full font-semibold">
                     {review.package}
                   </span>
                 </div>
-                
-                {/* Reviewer Info */}
                 <div className="flex justify-between items-center pt-3 border-t">
                   <div>
                     <p className="font-bold text-gray-800">{review.name}</p>
@@ -542,7 +540,6 @@ function Tours() {
             ))}
           </div>
 
-          {/* Booking Platform Links */}
           <div className="bg-gradient-to-r from-rasta-red/10 via-rasta-yellow/10 to-rasta-green/10 p-8 rounded-lg">
             <h3 className="text-2xl font-bold text-center mb-6 text-rasta-green">📱 See More Reviews & Book Direct</h3>
             <div className="flex justify-center gap-6 flex-wrap">
@@ -602,7 +599,6 @@ function Tours() {
                   <h3 className="text-2xl font-bold mb-3 text-rasta-green">{tour.title}</h3>
                   <p className="text-gray-700 mb-4">{tour.description}</p>
                   
-                  {/* Highlights */}
                   <div className="mb-4">
                     <p className="text-sm font-semibold text-rasta-green mb-2">INCLUDES:</p>
                     <div className="flex flex-wrap gap-2">
@@ -614,12 +610,16 @@ function Tours() {
                     </div>
                   </div>
                   
-                  {/* Details */}
                   <div className="flex justify-between items-center mb-4 py-4 border-t border-gray-200">
                     <span className="text-sm text-gray-600 font-semibold">{tour.duration}</span>
                     <span className="text-2xl font-bold text-rasta-red">{tour.price}</span>
                   </div>
-                  <button className="btn-primary w-full">Book This Experience</button>
+                  <button 
+                    onClick={() => handleBooking(tour.title, tour.price)}
+                    className="btn-primary w-full"
+                  >
+                    Book This Experience
+                  </button>
                 </div>
               </div>
             ))}
@@ -671,6 +671,15 @@ function Tours() {
           </Link>
         </div>
       </div>
+
+      {/* Booking Form Modal */}
+      {showBooking && selectedPackage && (
+        <BookingForm 
+          packageName={selectedPackage.name}
+          packagePrice={selectedPackage.price}
+          onClose={() => setShowBooking(false)}
+        />
+      )}
     </div>
   );
 }
